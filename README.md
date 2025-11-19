@@ -16,12 +16,44 @@
 
 Ho scoperto solo nel 2024 della sua esistenza e al momento ho raccolto **112 stelle**.
 
-| Anno | Stelle raccolte                                                                                    |
-| ---- | -------------------------------------------------------------------------------------------------- | --- |
-| 2015 | ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐ | 50  |
-| 2016 | ⭐⭐⭐⭐⭐⭐⭐⭐                                                                                   | 8   |
-| 2023 | ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐                                                                         | 16  |
-| 2024 | ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐                             | 38  |
+| Anno | Stelle |
+| ---- | ------ |
+| 2015 | 50     |
+| 2016 | 8      |
+| 2023 | 16     |
+| 2024 | 38     |
+
+<div align="center">
+  <svg viewBox="0 0 520 160" width="520" height="160" text-rendering="geometricPrecision">
+    <defs>
+      <linearGradient id="g" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#FFD166"/>
+        <stop offset="100%" stop-color="#EF476F"/>
+      </linearGradient>
+    </defs>
+    <style>
+      .label{fill:#fff;font-weight:700;stroke:#000;stroke-width:1;paint-order:stroke fill;font-family:Menlo,Consolas,Monaco,'SFMono-Regular',monospace}
+      .label--outside{fill:#333;stroke:none;font-weight:700;font-family:Menlo,Consolas,Monaco,'SFMono-Regular',monospace}
+    </style>
+    <text x="260" y="20" font-size="14" text-anchor="middle">Stelle raccolte per anno</text>
+    <rect x="80" y="40" width="400" height="16" rx="8" fill="#eaeaea"/>
+    <rect x="80" y="40" width="400" height="16" rx="8" fill="url(#g)"/>
+    <text x="10" y="52" font-size="12">2015</text>
+    <text class="label" x="472" y="48" font-size="12" text-anchor="end" dominant-baseline="middle">50</text>
+    <rect x="80" y="68" width="400" height="16" rx="8" fill="#eaeaea"/>
+    <rect x="80" y="68" width="64" height="16" rx="8" fill="url(#g)"/>
+    <text x="10" y="80" font-size="12">2016</text>
+    <text class="label" x="136" y="76" font-size="12" text-anchor="end" dominant-baseline="middle">8</text>
+    <rect x="80" y="96" width="400" height="16" rx="8" fill="#eaeaea"/>
+    <rect x="80" y="96" width="128" height="16" rx="8" fill="url(#g)"/>
+    <text x="10" y="108" font-size="12">2023</text>
+    <text class="label" x="200" y="104" font-size="12" text-anchor="end" dominant-baseline="middle">16</text>
+    <rect x="80" y="124" width="400" height="16" rx="8" fill="#eaeaea"/>
+    <rect x="80" y="124" width="304" height="16" rx="8" fill="url(#g)"/>
+    <text x="10" y="136" font-size="12">2024</text>
+    <text class="label" x="376" y="132" font-size="12" text-anchor="end" dominant-baseline="middle">38</text>
+  </svg>
+</div>
 
 > 🧝‍♂️ _Si, puoi partecipare a tutte le edizioni già concluse e allenarti aspettando la prossima._
 
