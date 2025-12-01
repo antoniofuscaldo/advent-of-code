@@ -14,7 +14,7 @@
 
 ## 🌟 I miei progressi
 
-Ho scoperto solo nel 2024 della sua esistenza e al momento ho raccolto **137 stelle**.
+Ho scoperto solo nel 2024 della sua esistenza e al momento ho raccolto **139 stelle**.
 
 | Anno | Stelle |
 | ---- | ------ |
@@ -23,6 +23,7 @@ Ho scoperto solo nel 2024 della sua esistenza e al momento ho raccolto **137 ste
 | 2022 | 8      |
 | 2023 | 22     |
 | 2024 | 38     |
+| 2025 | 2      |
 
 ![Stelle raccolte per anno](assets/progress.svg)
 
