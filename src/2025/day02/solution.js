@@ -105,5 +105,5 @@ export function part2(input) {
 }
 
 const input = fs.readFileSync(new URL('./input.txt', import.meta.url), 'utf8').trim();
-console.log(part1(input));
-console.log(part2(input));
+console.log('Part 1:', part1(input));
+console.log('Part 2:', part2(input));
