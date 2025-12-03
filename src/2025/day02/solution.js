@@ -12,12 +12,12 @@ function parseRanges(str) {
 }
 
 function buildDoubles(max) {
-  const out = [];
-  const maxDigits = String(max).length;
+  const out = [],
+    maxDigits = String(max).length;
   for (let k = 1; k <= Math.floor(maxDigits / 2); k++) {
-    const pow = 10 ** k;
-    const start = 10 ** (k - 1);
-    const end = pow - 1;
+    const pow = 10 ** k,
+      start = 10 ** (k - 1),
+      end = pow - 1;
     for (let y = start; y <= end; y++) {
       const v = y * pow + y;
       if (v > max) break;
@@ -29,12 +29,12 @@ function buildDoubles(max) {
 }
 
 function buildRepeats(max) {
-  const set = new Set();
-  const maxDigits = String(max).length;
+  const set = new Set(),
+    maxDigits = String(max).length;
   for (let k = 1; k <= Math.floor(maxDigits / 2); k++) {
-    const start = 10 ** (k - 1);
-    const end = 10 ** k - 1;
-    const maxRepeat = Math.floor(maxDigits / k);
+    const start = 10 ** (k - 1),
+      end = 10 ** k - 1,
+      maxRepeat = Math.floor(maxDigits / k);
     for (let r = 2; r <= maxRepeat; r++) {
       for (let y = start; y <= end; y++) {
         const v = Number(String(y).repeat(r));
@@ -49,8 +49,8 @@ function buildRepeats(max) {
 }
 
 function lowerBound(arr, x) {
-  let lo = 0;
-  let hi = arr.length;
+  let lo = 0,
+    hi = arr.length;
   while (lo < hi) {
     const mid = (lo + hi) >> 1;
     if (arr[mid] < x) lo = mid + 1;
@@ -60,8 +60,8 @@ function lowerBound(arr, x) {
 }
 
 function upperBound(arr, x) {
-  let lo = 0;
-  let hi = arr.length;
+  let lo = 0,
+    hi = arr.length;
   while (lo < hi) {
     const mid = (lo + hi) >> 1;
     if (arr[mid] <= x) lo = mid + 1;
@@ -73,15 +73,15 @@ function upperBound(arr, x) {
 export function part1(input) {
   const ranges = parseRanges(input);
   if (ranges.length === 0) return 0;
-  const max = ranges.reduce((m, r) => (r[1] > m ? r[1] : m), 0);
-  const doubles = buildDoubles(max);
-  const pref = new Array(doubles.length + 1);
+  const max = ranges.reduce((m, r) => (r[1] > m ? r[1] : m), 0),
+    doubles = buildDoubles(max),
+    pref = new Array(doubles.length + 1);
   pref[0] = 0;
   for (let i = 0; i < doubles.length; i++) pref[i + 1] = pref[i] + doubles[i];
   let sum = 0;
   for (const [a, b] of ranges) {
-    const lo = lowerBound(doubles, a);
-    const hi = upperBound(doubles, b);
+    const lo = lowerBound(doubles, a),
+      hi = upperBound(doubles, b);
     sum += pref[hi] - pref[lo];
   }
   return sum;
@@ -90,15 +90,15 @@ export function part1(input) {
 export function part2(input) {
   const ranges = parseRanges(input);
   if (ranges.length === 0) return 0;
-  const max = ranges.reduce((m, r) => (r[1] > m ? r[1] : m), 0);
-  const repeats = buildRepeats(max);
-  const pref = new Array(repeats.length + 1);
+  const max = ranges.reduce((m, r) => (r[1] > m ? r[1] : m), 0),
+    repeats = buildRepeats(max),
+    pref = new Array(repeats.length + 1);
   pref[0] = 0;
   for (let i = 0; i < repeats.length; i++) pref[i + 1] = pref[i] + repeats[i];
   let sum = 0;
   for (const [a, b] of ranges) {
-    const lo = lowerBound(repeats, a);
-    const hi = upperBound(repeats, b);
+    const lo = lowerBound(repeats, a),
+      hi = upperBound(repeats, b);
     sum += pref[hi] - pref[lo];
   }
   return sum;

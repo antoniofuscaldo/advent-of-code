@@ -9,9 +9,9 @@ function parse(str) {
 }
 
 function walk(instructions) {
-  let dir = 0;
-  let x = 0;
-  let y = 0;
+  let dir = 0,
+    x = 0,
+    y = 0;
   const seen = new Set(['0,0']);
   let repeat = null;
   for (const inst of instructions) {
@@ -21,7 +21,7 @@ function walk(instructions) {
       else if (dir === 1) x += 1;
       else if (dir === 2) y -= 1;
       else x -= 1;
-      const key = x + ',' + y;
+      const key = `${x},${y}`;
       if (!repeat) {
         if (seen.has(key)) repeat = { x, y };
         else seen.add(key);

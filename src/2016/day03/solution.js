@@ -24,9 +24,9 @@ export function part2(input) {
   const rows = parseRows(input);
   let count = 0;
   for (let i = 0; i < rows.length; i += 3) {
-    const r1 = rows[i];
-    const r2 = rows[i + 1];
-    const r3 = rows[i + 2];
+    const r1 = rows[i],
+      r2 = rows[i + 1],
+      r3 = rows[i + 2];
     if (!r3) break;
     if (valid(r1[0], r2[0], r3[0])) count++;
     if (valid(r1[1], r2[1], r3[1])) count++;

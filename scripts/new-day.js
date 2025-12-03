@@ -39,17 +39,17 @@ function writeFile(p) {
 }
 
 function main() {
-  const cwd = process.cwd();
-  const srcRoot = path.join(cwd, 'src');
-  let yearArg = getArg('--year');
+  const cwd = process.cwd(),
+    srcRoot = path.join(cwd, 'src'),
+    yearArg = getArg('--year');
   let year = yearArg ? Number(yearArg) : undefined;
   if (!year) {
     const years = listYears(srcRoot);
     year = years.length ? years[0] : new Date().getFullYear();
   }
-  const day = nextDayForYear(srcRoot, year);
-  const dd = pad(day);
-  const targetDir = path.join(srcRoot, String(year), `day${dd}`);
+  const day = nextDayForYear(srcRoot, year),
+    dd = pad(day),
+    targetDir = path.join(srcRoot, String(year), `day${dd}`);
   ensureDir(targetDir);
   writeFile(path.join(targetDir, 'solution.js'));
   writeFile(path.join(targetDir, 'puzzle.txt'));

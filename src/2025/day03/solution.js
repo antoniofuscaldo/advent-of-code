@@ -8,9 +8,9 @@ function parse(str) {
 }
 
 function maxPairValue(line) {
-  let bestT = -1;
-  let bestU = -1;
-  let maxRight = -1;
+  let bestT = -1,
+    bestU = -1,
+    maxRight = -1;
   for (let i = line.length - 1; i >= 0; i--) {
     const d = line.charCodeAt(i) - 48;
     if (maxRight !== -1) {
@@ -27,12 +27,12 @@ function maxPairValue(line) {
 
 function maxSubseqValue(line, k) {
   const n = line.length;
-  let start = 0;
-  let out = 0;
+  let out = 0,
+    start = 0;
   for (let p = 0; p < k; p++) {
     const end = n - (k - p);
-    let best = -1;
-    let idx = -1;
+    let best = -1,
+      idx = -1;
     for (let i = start; i <= end; i++) {
       const d = line.charCodeAt(i) - 48;
       if (d > best) {

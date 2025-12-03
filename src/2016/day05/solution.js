@@ -9,8 +9,8 @@ function nextHash(door, i) {
 
 export function part1(input) {
   const door = input.trim();
-  let i = 0;
-  let out = '';
+  let i = 0,
+    out = '';
   while (out.length < 8) {
     const buf = nextHash(door, i);
     if (buf[0] === 0 && buf[1] === 0 && (buf[2] & 0xf0) === 0) {

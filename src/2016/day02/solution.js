@@ -13,9 +13,9 @@ function codePart1(lines) {
     ['4', '5', '6'],
     ['7', '8', '9'],
   ];
-  let r = 1;
-  let c = 1;
-  let out = '';
+  let c = 1,
+    out = '',
+    r = 1;
   for (const line of lines) {
     for (const ch of line) {
       if (ch === 'U' && r > 0) r -= 1;
@@ -36,13 +36,13 @@ function codePart2(lines) {
     [null, 'A', 'B', 'C', null],
     [null, null, 'D', null, null],
   ];
-  let r = 2;
-  let c = 0;
-  let out = '';
+  let c = 0,
+    out = '',
+    r = 2;
   for (const line of lines) {
     for (const ch of line) {
-      let nr = r;
-      let nc = c;
+      let nr = r,
+        nc = c;
       if (ch === 'U') nr -= 1;
       else if (ch === 'D') nr += 1;
       else if (ch === 'L') nc -= 1;
