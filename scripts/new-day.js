@@ -54,6 +54,7 @@ function main() {
   writeFile(path.join(targetDir, 'solution.js'));
   writeFile(path.join(targetDir, 'puzzle.txt'));
   writeFile(path.join(targetDir, 'input.txt'));
+  writeFile(path.join(targetDir, 'test.txt'));
   process.stdout.write(`Created src/${year}/day${dd}\n`);
 }
 
