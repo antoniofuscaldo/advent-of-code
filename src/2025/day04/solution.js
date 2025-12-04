@@ -93,6 +93,10 @@ export function part2(input) {
   return removed;
 }
 
+const test = fs.readFileSync(new URL('./test.txt', import.meta.url), 'utf8').trim();
+console.log('Test part 1:', part1(test));
+console.log('Test part 2:', part2(test));
+
 const input = fs.readFileSync(new URL('./input.txt', import.meta.url), 'utf8').trim();
-console.log('Part 1:', part1(input));
-console.log('Part 2:', part2(input));
+console.log('Solution part 1:', part1(input));
+console.log('Solution part 2:', part2(input));
