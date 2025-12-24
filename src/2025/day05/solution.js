@@ -1,8 +1,8 @@
 import fs from 'fs';
 
 function parseDatabase(str) {
-  const lines = str.split('\n').map((l) => l.trim());
-  const ranges = [];
+  const lines = str.split('\n').map((l) => l.trim()),
+    ranges = [];
   let i = 0;
   while (i < lines.length) {
     const l = lines[i];
@@ -26,8 +26,8 @@ function mergeRanges(ranges) {
   ranges.sort((r1, r2) => (r1[0] !== r2[0] ? r1[0] - r2[0] : r1[1] - r2[1]));
   const out = [ranges[0].slice()];
   for (let i = 1; i < ranges.length; i++) {
-    const [a, b] = ranges[i];
-    const last = out[out.length - 1];
+    const [a, b] = ranges[i],
+      last = out[out.length - 1];
     if (a <= last[1]) {
       if (b > last[1]) last[1] = b;
     } else out.push([a, b]);
@@ -36,9 +36,9 @@ function mergeRanges(ranges) {
 }
 
 export function part1(input) {
-  const { ranges, ids } = parseDatabase(input);
-  const merged = mergeRanges(ranges);
-  const starts = merged.map((r) => r[0]);
+  const { ranges, ids } = parseDatabase(input),
+    merged = mergeRanges(ranges),
+    starts = merged.map((r) => r[0]);
   let fresh = 0;
   for (const id of ids) {
     let lo = 0,
@@ -55,8 +55,8 @@ export function part1(input) {
 }
 
 export function part2(input) {
-  const { ranges } = parseDatabase(input);
-  const merged = mergeRanges(ranges);
+  const { ranges } = parseDatabase(input),
+    merged = mergeRanges(ranges);
   let total = 0;
   for (const [a, b] of merged) total += b - a + 1;
   return total;

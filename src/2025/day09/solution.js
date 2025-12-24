@@ -9,15 +9,15 @@ function parse(str) {
 }
 
 export function part1(input) {
-  const pts = parse(input);
-  const n = pts.length;
+  const pts = parse(input),
+    n = pts.length;
   if (n < 2) return 0;
   let best = 0;
   for (let i = 0; i < n; i++) {
     const [xi, yi] = pts[i];
     for (let j = i + 1; j < n; j++) {
-      const [xj, yj] = pts[j];
-      const area = (Math.abs(xi - xj) + 1) * (Math.abs(yi - yj) + 1);
+      const [xj, yj] = pts[j],
+        area = (Math.abs(xi - xj) + 1) * (Math.abs(yi - yj) + 1);
       if (area > best) best = area;
     }
   }
@@ -25,42 +25,42 @@ export function part1(input) {
 }
 
 export function part2(input) {
-  const pts = parse(input);
-  const n = pts.length;
+  const pts = parse(input),
+    n = pts.length;
   if (n < 2) return 0;
   const edges = [];
   for (let i = 0; i < n; i++) {
-    const j = (i + 1) % n;
-    const [x1, y1] = pts[i];
-    const [x2, y2] = pts[j];
-    const minX = x1 < x2 ? x1 : x2;
-    const maxX = x1 > x2 ? x1 : x2;
-    const minY = y1 < y2 ? y1 : y2;
-    const maxY = y1 > y2 ? y1 : y2;
+    const j = (i + 1) % n,
+      [x1, y1] = pts[i],
+      [x2, y2] = pts[j],
+      minX = x1 < x2 ? x1 : x2,
+      maxX = x1 > x2 ? x1 : x2,
+      minY = y1 < y2 ? y1 : y2,
+      maxY = y1 > y2 ? y1 : y2;
     edges.push([minX, maxX, minY, maxY]);
   }
   function insidePoly(cx, cy) {
     let inside = false;
     for (let i = 0, j = n - 1; i < n; j = i++) {
-      const [xi, yi] = pts[i];
-      const [xj, yj] = pts[j];
-      const intersect = yi > cy !== yj > cy && cx < ((xj - xi) * (cy - yi)) / (yj - yi) + xi;
+      const [xi, yi] = pts[i],
+        [xj, yj] = pts[j],
+        intersect = yi > cy !== yj > cy && cx < ((xj - xi) * (cy - yi)) / (yj - yi) + xi;
       if (intersect) inside = !inside;
     }
     return inside;
   }
   function onBoundary(px, py) {
     for (let i = 0; i < n; i++) {
-      const j = (i + 1) % n;
-      const [x1, y1] = pts[i];
-      const [x2, y2] = pts[j];
+      const j = (i + 1) % n,
+        [x1, y1] = pts[i],
+        [x2, y2] = pts[j];
       if (x1 === x2) {
-        const minY = y1 < y2 ? y1 : y2;
-        const maxY = y1 > y2 ? y1 : y2;
+        const minY = y1 < y2 ? y1 : y2,
+          maxY = y1 > y2 ? y1 : y2;
         if (px === x1 && py >= minY && py <= maxY) return true;
       } else if (y1 === y2) {
-        const minX = x1 < x2 ? x1 : x2;
-        const maxX = x1 > x2 ? x1 : x2;
+        const minX = x1 < x2 ? x1 : x2,
+          maxX = x1 > x2 ? x1 : x2;
         if (py === y1 && px >= minX && px <= maxX) return true;
       }
     }
@@ -70,20 +70,20 @@ export function part2(input) {
   for (let i = 0; i < n; i++) {
     const [xi0, yi0] = pts[i];
     for (let j = i + 1; j < n; j++) {
-      const [xj0, yj0] = pts[j];
-      const xi = xi0 < xj0 ? xi0 : xj0;
-      const xj = xi0 < xj0 ? xj0 : xi0;
-      const yi = yi0 < yj0 ? yi0 : yj0;
-      const yj = yi0 < yj0 ? yj0 : yi0;
-      const area = (xj - xi + 1) * (yj - yi + 1);
+      const [xj0, yj0] = pts[j],
+        xi = xi0 < xj0 ? xi0 : xj0,
+        xj = xi0 < xj0 ? xj0 : xi0,
+        yi = yi0 < yj0 ? yi0 : yj0,
+        yj = yi0 < yj0 ? yj0 : yi0,
+        area = (xj - xi + 1) * (yj - yi + 1);
       if (area <= best) continue;
-      const cx = (xi + xj) / 2;
-      const cy = (yi + yj) / 2;
+      const cx = (xi + xj) / 2,
+        cy = (yi + yj) / 2;
       if (!insidePoly(cx, cy)) continue;
-      const c1in = insidePoly(xi, yi) || onBoundary(xi, yi);
-      const c2in = insidePoly(xi, yj) || onBoundary(xi, yj);
-      const c3in = insidePoly(xj, yi) || onBoundary(xj, yi);
-      const c4in = insidePoly(xj, yj) || onBoundary(xj, yj);
+      const c1in = insidePoly(xi, yi) || onBoundary(xi, yi),
+        c2in = insidePoly(xi, yj) || onBoundary(xi, yj),
+        c3in = insidePoly(xj, yi) || onBoundary(xj, yi),
+        c4in = insidePoly(xj, yj) || onBoundary(xj, yj);
       if (!(c1in && c2in && c3in && c4in)) continue;
       let inside = true;
       for (let k = 0; k < edges.length; k++) {

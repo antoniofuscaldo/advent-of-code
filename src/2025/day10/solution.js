@@ -1,23 +1,23 @@
 import fs from 'fs';
 
 function parseMachines(str) {
-  const lines = str.split('\n').map((l) => l.trim());
-  const machines = [];
-  const seen = new Set();
+  const lines = str.split('\n').map((l) => l.trim()),
+    machines = [],
+    seen = new Set();
   for (const l of lines) {
     if (!l) continue;
     if (seen.has(l)) continue;
     seen.add(l);
     const bm = l.match(/\[([.#]+)\]/);
     if (!bm) continue;
-    const targetStr = bm[1];
-    const n = targetStr.length;
+    const targetStr = bm[1],
+      n = targetStr.length;
     let target = 0n;
     for (let i = 0; i < n; i++) {
       if (targetStr[i] === '#') target |= 1n << BigInt(i);
     }
-    const masks = [];
-    const pm = [...l.matchAll(/\(([^)]*)\)/g)];
+    const masks = [],
+      pm = [...l.matchAll(/\(([^)]*)\)/g)];
     for (const m of pm) {
       const nums = m[1].match(/\d+/g);
       if (!nums) continue;
@@ -42,8 +42,8 @@ function parseMachines(str) {
 
 function minPressesBFS(target, masks) {
   if (target === 0n) return 0;
-  const uniq = new Set();
-  const dedup = [];
+  const uniq = new Set(),
+    dedup = [];
   for (const m of masks) {
     if (m === 0n) continue;
     const k = m.toString();
@@ -52,14 +52,14 @@ function minPressesBFS(target, masks) {
       dedup.push(m);
     }
   }
-  const q = [];
-  const dist = new Map();
-  const start = 0n;
+  const q = [],
+    dist = new Map(),
+    start = 0n;
   q.push(start);
   dist.set(start, 0);
   for (let qi = 0; qi < q.length; qi++) {
-    const cur = q[qi];
-    const d = dist.get(cur);
+    const cur = q[qi],
+      d = dist.get(cur);
     for (const m of dedup) {
       const nxt = cur ^ m;
       if (nxt === target) return d + 1;
@@ -73,9 +73,9 @@ function minPressesBFS(target, masks) {
 }
 
 function minPressesCounters(b, masks) {
-  const uniq = new Set();
-  const dedup = [];
-  const n = b.length;
+  const uniq = new Set(),
+    dedup = [],
+    n = b.length;
   for (const m of masks) {
     if (m === 0n) continue;
     const k = m.toString();
@@ -95,16 +95,16 @@ function minPressesCounters(b, masks) {
       if (!ok) return -1;
     }
   }
-  const start = new Array(n).fill(0);
-  const key = (arr) => arr.join(',');
-  const targetKey = key(b);
-  const q = [];
-  const dist = new Map();
+  const start = new Array(n).fill(0),
+    key = (arr) => arr.join(','),
+    targetKey = key(b),
+    q = [],
+    dist = new Map();
   q.push(start);
   dist.set(key(start), 0);
   for (let qi = 0; qi < q.length; qi++) {
-    const cur = q[qi];
-    const d = dist.get(key(cur));
+    const cur = q[qi],
+      d = dist.get(key(cur));
     for (const m of dedup) {
       const nxt = cur.slice();
       let overshoot = false;

@@ -1,16 +1,16 @@
 import fs from 'fs';
 
 function parse(str) {
-  const lines = str.split('\n');
-  const width = lines.reduce((m, l) => (l.length > m ? l.length : m), 0);
+  const lines = str.split('\n'),
+    width = lines.reduce((m, l) => (l.length > m ? l.length : m), 0);
   return lines.map((l) => l + ' '.repeat(width - l.length));
 }
 
 function splitBlocks(grid) {
   const h = grid.length;
   if (h === 0) return [];
-  const w = grid[0].length;
-  const sep = new Array(w).fill(true);
+  const w = grid[0].length,
+    sep = new Array(w).fill(true);
   for (let c = 0; c < w; c++) {
     for (let r = 0; r < h; r++) {
       if (grid[r][c] !== ' ') {
@@ -24,7 +24,7 @@ function splitBlocks(grid) {
   while (c < w) {
     while (c < w && sep[c]) c += 1;
     if (c >= w) break;
-    let start = c;
+    const start = c;
     while (c < w && !sep[c]) c += 1;
     blocks.push([start, c - 1]);
   }
@@ -51,9 +51,9 @@ function readOp(row, start, end) {
 export function part1(input) {
   const grid = parse(input);
   if (grid.length === 0) return 0;
-  const h = grid.length;
-  const opRow = grid[h - 1];
-  const blocks = splitBlocks(grid);
+  const h = grid.length,
+    opRow = grid[h - 1],
+    blocks = splitBlocks(grid);
   let total = 0;
   for (const [start, end] of blocks) {
     const op = readOp(opRow, start, end);
@@ -71,9 +71,9 @@ export function part1(input) {
 export function part2(input) {
   const grid = parse(input);
   if (grid.length === 0) return 0;
-  const h = grid.length;
-  const opRow = grid[h - 1];
-  const blocks = splitBlocks(grid);
+  const h = grid.length,
+    opRow = grid[h - 1],
+    blocks = splitBlocks(grid);
   let total = 0;
   for (const [start, end] of blocks) {
     const op = readOp(opRow, start, end);

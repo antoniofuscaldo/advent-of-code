@@ -17,11 +17,11 @@ function productTop3(sizes) {
 }
 
 function part1(input, k = 1000) {
-  const pts = parse(input);
-  const n = pts.length;
+  const pts = parse(input),
+    n = pts.length;
   if (n === 0) return 0;
-  const parent = new Array(n);
-  const size = new Array(n);
+  const parent = new Array(n),
+    size = new Array(n);
   for (let i = 0; i < n; i++) {
     parent[i] = i;
     size[i] = 1;
@@ -50,11 +50,11 @@ function part1(input, k = 1000) {
   for (let i = 0; i < n; i++) {
     const [xi, yi, zi] = pts[i];
     for (let j = i + 1; j < n; j++) {
-      const [xj, yj, zj] = pts[j];
-      const dx = xi - xj;
-      const dy = yi - yj;
-      const dz = zi - zj;
-      const d2 = dx * dx + dy * dy + dz * dz;
+      const [xj, yj, zj] = pts[j],
+        dx = xi - xj,
+        dy = yi - yj,
+        dz = zi - zj,
+        d2 = dx * dx + dy * dy + dz * dz;
       pairs.push([d2, i, j]);
     }
   }
@@ -73,11 +73,11 @@ function part1(input, k = 1000) {
 }
 
 function part2(input) {
-  const pts = parse(input);
-  const n = pts.length;
+  const pts = parse(input),
+    n = pts.length;
   if (n === 0) return 0;
-  const parent = new Array(n);
-  const size = new Array(n);
+  const parent = new Array(n),
+    size = new Array(n);
   for (let i = 0; i < n; i++) {
     parent[i] = i;
     size[i] = 1;
@@ -106,11 +106,11 @@ function part2(input) {
   for (let i = 0; i < n; i++) {
     const [xi, yi, zi] = pts[i];
     for (let j = i + 1; j < n; j++) {
-      const [xj, yj, zj] = pts[j];
-      const dx = xi - xj;
-      const dy = yi - yj;
-      const dz = zi - zj;
-      const d2 = dx * dx + dy * dy + dz * dz;
+      const [xj, yj, zj] = pts[j],
+        dx = xi - xj,
+        dy = yi - yj,
+        dz = zi - zj,
+        d2 = dx * dx + dy * dy + dz * dz;
       pairs.push([d2, i, j]);
     }
   }

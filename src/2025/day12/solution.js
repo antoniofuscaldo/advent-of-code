@@ -1,8 +1,8 @@
 import fs from 'fs';
 
 function parseInput(str) {
-  const lines = str.split('\n').map((l) => l.trim());
-  const shapes = [];
+  const lines = str.split('\n').map((l) => l.trim()),
+    shapes = [];
   let i = 0;
   while (i < lines.length) {
     const line = lines[i];
@@ -40,22 +40,22 @@ function parseInput(str) {
     if (!l) continue;
     const m = l.match(/^(\d+)x(\d+):\s*(.*)$/);
     if (!m) continue;
-    const w = Number(m[1]);
-    const h = Number(m[2]);
-    const cnt = m[3]
-      .trim()
-      .split(/\s+/)
-      .filter(Boolean)
-      .map((x) => Number(x));
+    const w = Number(m[1]),
+      h = Number(m[2]),
+      cnt = m[3]
+        .trim()
+        .split(/\s+/)
+        .filter(Boolean)
+        .map((x) => Number(x));
     regions.push({ w, h, counts: cnt });
   }
   return { shapes, regions };
 }
 
 function shapeOffsets(rows) {
-  const r0 = Math.floor(rows.length / 2);
-  const c0 = Math.floor(rows[0].length / 2);
-  const offs = [];
+  const r0 = Math.floor(rows.length / 2),
+    c0 = Math.floor(rows[0].length / 2),
+    offs = [];
   for (let r = 0; r < rows.length; r++) {
     const row = rows[r];
     for (let c = 0; c < row.length; c++) {
@@ -74,12 +74,12 @@ function reflectH([dr, dc]) {
 
 function canonicalKey(offs) {
   const sorted = offs.slice().sort((a, b) => (a[0] - b[0] !== 0 ? a[0] - b[0] : a[1] - b[1]));
-  return sorted.map((p) => p[0] + ',' + p[1]).join(';');
+  return sorted.map((p) => `${p[0]},${p[1]}`).join(';');
 }
 
 function transformVariants(offs) {
-  const variants = [];
-  const seen = new Set();
+  const variants = [],
+    seen = new Set();
   for (let rot = 0; rot < 4; rot++) {
     for (let ref = 0; ref < 2; ref++) {
       const cur = [];
@@ -112,18 +112,18 @@ function placementMasksForShape(variants, w, h) {
       if (dc < minC) minC = dc;
       if (dc > maxC) maxC = dc;
     }
-    const rStart = -minR;
-    const rEnd = h - 1 - maxR;
-    const cStart = -minC;
-    const cEnd = w - 1 - maxC;
+    const rStart = -minR,
+      rEnd = h - 1 - maxR,
+      cStart = -minC,
+      cEnd = w - 1 - maxC;
     if (rStart > rEnd || cStart > cEnd) continue;
     for (let r = rStart; r <= rEnd; r++) {
       for (let c = cStart; c <= cEnd; c++) {
         let mask = 0n;
         for (const [dr, dc] of offs) {
-          const rr = r + dr;
-          const cc = c + dc;
-          const idx = rr * w + cc;
+          const rr = r + dr,
+            cc = c + dc,
+            idx = rr * w + cc;
           mask |= 1n << BigInt(idx);
         }
         masksSet.add(mask.toString());
@@ -136,16 +136,16 @@ function placementMasksForShape(variants, w, h) {
 }
 
 function canFitRegion(shapesRows, w, h, counts) {
-  const nShapes = shapesRows.length;
-  const needed = counts.slice(0, nShapes);
+  const nShapes = shapesRows.length,
+    needed = counts.slice(0, nShapes);
   for (let i = counts.length; i < nShapes; i++) needed.push(0);
-  const totalPieces = needed.reduce((a, b) => a + b, 0);
-  const totalArea = totalPieces * 7;
+  const totalPieces = needed.reduce((a, b) => a + b, 0),
+    totalArea = totalPieces * 7;
   if (totalArea > w * h) return false;
   if (w <= 0 || h <= 0) return false;
-  const shapesOffs = shapesRows.map(shapeOffsets);
-  const variants = shapesOffs.map(transformVariants);
-  const placementsByShape = variants.map((vars) => placementMasksForShape(vars, w, h));
+  const shapesOffs = shapesRows.map(shapeOffsets),
+    variants = shapesOffs.map(transformVariants),
+    placementsByShape = variants.map((vars) => placementMasksForShape(vars, w, h));
   for (let s = 0; s < nShapes; s++) {
     if (needed[s] > 0 && placementsByShape[s].length < needed[s]) return false;
   }
@@ -157,10 +157,10 @@ function canFitRegion(shapesRows, w, h, counts) {
   const memo = new Map();
   function dfs(idx, used) {
     if (idx === seq.length) return true;
-    const key = idx + '|' + used.toString();
+    const key = `${idx}|${used.toString()}`;
     if (memo.has(key)) return memo.get(key);
-    const s = seq[idx];
-    const list = placementsByShape[s];
+    const s = seq[idx],
+      list = placementsByShape[s];
     for (let i = 0; i < list.length; i++) {
       const m = list[i];
       if ((m & used) !== 0n) continue;

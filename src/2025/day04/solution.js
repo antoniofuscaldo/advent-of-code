@@ -38,15 +38,15 @@ export function part1(input) {
 }
 
 export function part2(input) {
-  const lines = parse(input);
-  const h = lines.length;
+  const lines = parse(input),
+    h = lines.length;
   if (h === 0) return 0;
-  const widths = lines.map((l) => l.length);
-  const isRoll = lines.map((l) => Array.from(l, (ch) => ch === '@'));
-  const deg = lines.map((l) => Array(l.length).fill(0));
-  const enq = lines.map((l) => Array(l.length).fill(false));
-  const drs = [-1, -1, -1, 0, 0, 1, 1, 1];
-  const dcs = [-1, 0, 1, -1, 1, -1, 0, 1];
+  const widths = lines.map((l) => l.length),
+    isRoll = lines.map((l) => Array.from(l, (ch) => ch === '@')),
+    deg = lines.map((l) => Array(l.length).fill(0)),
+    enq = lines.map((l) => Array(l.length).fill(false)),
+    drs = [-1, -1, -1, 0, 0, 1, 1, 1],
+    dcs = [-1, 0, 1, -1, 1, -1, 0, 1];
   function inBounds(r, c) {
     return r >= 0 && r < h && c >= 0 && c < widths[r];
   }

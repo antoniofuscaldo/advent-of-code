@@ -1,16 +1,16 @@
 import fs from 'fs';
 
 function parse(str) {
-  const lines = str.split('\n').map((l) => l.trim());
-  const adj = new Map();
+  const lines = str.split('\n').map((l) => l.trim()),
+    adj = new Map();
   for (const l of lines) {
     if (!l) continue;
     const idx = l.indexOf(':');
     if (idx < 0) continue;
     const left = l.slice(0, idx).trim();
     if (!left) continue;
-    const right = l.slice(idx + 1).trim();
-    const toks = right ? right.split(/\s+/) : [];
+    const right = l.slice(idx + 1).trim(),
+      toks = right ? right.split(/\s+/) : [];
     if (!adj.has(left)) adj.set(left, []);
     const arr = adj.get(left);
     for (const tok of toks) {
@@ -21,8 +21,8 @@ function parse(str) {
 }
 
 function countPaths(adj, start, target) {
-  const memo = new Map();
-  const visiting = new Set();
+  const memo = new Map(),
+    visiting = new Set();
   function dfs(node) {
     if (node === target) return 1;
     if (memo.has(node)) return memo.get(node);
@@ -44,16 +44,16 @@ export function part1(input) {
 }
 
 export function part2(input) {
-  const adj = parse(input);
-  const req = ['dac', 'fft'];
-  const idx = new Map();
+  const adj = parse(input),
+    req = ['dac', 'fft'],
+    idx = new Map();
   for (let i = 0; i < req.length; i++) idx.set(req[i], i);
-  const full = (1 << req.length) - 1;
-  const memo = new Map();
-  const visiting = new Set();
+  const full = (1 << req.length) - 1,
+    memo = new Map(),
+    visiting = new Set();
   function dfs(node, mask) {
     if (node === 'out') return mask === full ? 1 : 0;
-    const key = node + '|' + mask;
+    const key = `${node}|${mask}`;
     if (memo.has(key)) return memo.get(key);
     if (visiting.has(key)) return 0;
     visiting.add(key);
@@ -71,8 +71,8 @@ export function part2(input) {
   return dfs('svr', 0);
 }
 
-const part1Test = fs.readFileSync(new URL('./part1_test.txt', import.meta.url), 'utf8').trim();
-const part2Test = fs.readFileSync(new URL('./part2_test.txt', import.meta.url), 'utf8').trim();
+const part1Test = fs.readFileSync(new URL('./part1_test.txt', import.meta.url), 'utf8').trim(),
+  part2Test = fs.readFileSync(new URL('./part2_test.txt', import.meta.url), 'utf8').trim();
 if (part1Test && part2Test) {
   console.log('Test part 1:', part1(part1Test));
   console.log('Test part 2:', part2(part2Test));

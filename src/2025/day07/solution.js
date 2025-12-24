@@ -21,8 +21,8 @@ function lowerBound(arr, x) {
 function countSplits(lines) {
   const h = lines.length;
   if (h === 0) return 0;
-  const w = lines.reduce((m, l) => (l.length > m ? l.length : m), 0);
-  const cols = Array.from({ length: w }, () => []);
+  const w = lines.reduce((m, l) => (l.length > m ? l.length : m), 0),
+    cols = Array.from({ length: w }, () => []);
   let sr = -1,
     sc = -1;
   for (let r = 0; r < h; r++) {
@@ -37,9 +37,9 @@ function countSplits(lines) {
     }
   }
   if (sr === -1) return 0;
-  const q = [[sr, sc]];
-  const seen = new Set([sr + ',' + sc]);
-  const used = new Set();
+  const q = [[sr, sc]],
+    seen = new Set([`${sr},${sc}`]),
+    used = new Set();
   let splits = 0;
   while (q.length) {
     const [r, c] = q.shift();
@@ -48,13 +48,13 @@ function countSplits(lines) {
     if (arr.length === 0) continue;
     const idx = lowerBound(arr, r);
     if (idx >= arr.length) continue;
-    const nr = arr[idx];
-    const key = nr + ',' + c;
+    const nr = arr[idx],
+      key = `${nr},${c}`;
     if (used.has(key)) continue;
     used.add(key);
     splits += 1;
-    const left = nr + ',' + (c - 1);
-    const right = nr + ',' + (c + 1);
+    const left = `${nr},${c - 1}`,
+      right = `${nr},${c + 1}`;
     if (!seen.has(left) && c - 1 >= 0) {
       seen.add(left);
       q.push([nr, c - 1]);
@@ -74,8 +74,8 @@ export function part1(input) {
 function countTimelines(lines) {
   const h = lines.length;
   if (h === 0) return 0;
-  const w = lines.reduce((m, l) => (l.length > m ? l.length : m), 0);
-  const cols = Array.from({ length: w }, () => []);
+  const w = lines.reduce((m, l) => (l.length > m ? l.length : m), 0),
+    cols = Array.from({ length: w }, () => []);
   let sr = -1,
     sc = -1;
   for (let r = 0; r < h; r++) {
@@ -92,7 +92,7 @@ function countTimelines(lines) {
   if (sr === -1) return 0;
   const memo = new Map();
   function key(r, c) {
-    return r + ',' + c;
+    return `${r},${c}`;
   }
   function dfs(r, c) {
     if (c < 0 || c >= w) return 1;
@@ -100,9 +100,9 @@ function countTimelines(lines) {
     if (arr.length === 0) return 1;
     const idx = lowerBound(arr, r);
     if (idx >= arr.length) return 1;
-    const nr = arr[idx];
-    const k1 = key(nr, c - 1);
-    const k2 = key(nr, c + 1);
+    const nr = arr[idx],
+      k1 = key(nr, c - 1),
+      k2 = key(nr, c + 1);
     let left, right;
     if (memo.has(k1)) left = memo.get(k1);
     else {
